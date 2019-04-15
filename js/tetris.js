@@ -150,12 +150,6 @@ function keyPress( key ) {
                 current = rotated;
             }
             break;
-        case 'drop':
-            while( valid(0, 1) ) {
-                ++currentY;
-            }
-            tick();
-            break;
     }
 }
 
