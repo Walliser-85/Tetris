@@ -48,7 +48,7 @@ function newShape() {
     // new shape starts to move
     freezed = false;
     // position where the shape will evolve
-    currentX = 5;
+    currentX = 4;
     currentY = 0;
 }
 
@@ -184,6 +184,7 @@ function valid( offsetX, offsetY, newCurrent ) {
 
 function playButtonClicked() {
     newGame();
+
     document.getElementById("playbutton").disabled = true;
 }
 
