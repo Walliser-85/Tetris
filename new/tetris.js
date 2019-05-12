@@ -3,6 +3,7 @@ const context = canvas.getContext('2d');
 
 context.scale(20, 20);
 
+//Schaut, ob eine Linie voll ist
 function arenaSweep() {
     let rowCount = 1;
     outer: for (let y = arena.length -1; y > 0; --y) {
@@ -20,7 +21,7 @@ function arenaSweep() {
         rowCount *= 2;
     }
 }
-
+//ob man zuoberst ankommt
 function collide(arena, player) {
     const m = player.matrix;
     const o = player.pos;
@@ -35,7 +36,7 @@ function collide(arena, player) {
     }
     return false;
 }
-
+//Matrix mit 0en
 function createMatrix(w, h) {
     const matrix = [];
     while (h--) {
@@ -43,7 +44,7 @@ function createMatrix(w, h) {
     }
     return matrix;
 }
-
+//Figuren erstellen
 function createPiece(type)
 {
     if (type === 'I') {
@@ -90,11 +91,12 @@ function createPiece(type)
         ];
     }
 }
-
+//Figur zeichnen
 function drawMatrix(matrix, offset) {
     matrix.forEach((row, y) => {
         row.forEach((value, x) => {
             if (value !== 0) {
+                //Füllung von der Zelle
                 context.fillStyle = colors[value];
                 context.fillRect(x + offset.x,
                     y + offset.y,
@@ -103,7 +105,7 @@ function drawMatrix(matrix, offset) {
         });
     });
 }
-
+//das Hauptviereck Zeichnen, das Canvas
 function draw() {
     context.fillStyle = '#000';
     context.fillRect(0, 0, canvas.width, canvas.height);
@@ -121,7 +123,7 @@ function merge(arena, player) {
         });
     });
 }
-
+//Figur drehen
 function rotate(matrix, dir) {
     for (let y = 0; y < matrix.length; ++y) {
         for (let x = 0; x < y; ++x) {
@@ -141,7 +143,7 @@ function rotate(matrix, dir) {
         matrix.reverse();
     }
 }
-
+//Wenn eine Figur runter kommt
 function playerDrop() {
     player.pos.y++;
     if (collide(arena, player)) {
@@ -153,27 +155,28 @@ function playerDrop() {
     }
     dropCounter = 0;
 }
-
+//Figur wird bewegt
 function playerMove(offset) {
     player.pos.x += offset;
     if (collide(arena, player)) {
         player.pos.x -= offset;
     }
 }
-
+//neue Figur kommt runter
 function playerReset() {
     const pieces = 'TJLOSZI';
     player.matrix = createPiece(pieces[pieces.length * Math.random() | 0]);
     player.pos.y = 0;
     player.pos.x = (arena[0].length / 2 | 0) -
         (player.matrix[0].length / 2 | 0);
+    //wenn zuoberst angekommen
     if (collide(arena, player)) {
         arena.forEach(row => row.fill(0));
         player.score = 0;
         updateScore();
     }
 }
-
+//Figur drehen, ohne das sie Rand/Figuren überschreitet
 function playerRotate(dir) {
     const pos = player.pos.x;
     let offset = 1;
@@ -218,9 +221,7 @@ document.addEventListener('keydown', event => {
         playerMove(1);
     } else if (event.keyCode === 40) {
         playerDrop();
-    } else if (event.keyCode === 81) {
-        playerRotate(-1);
-    } else if (event.keyCode === 87) {
+    } else if (event.keyCode === 32) {
         playerRotate(1);
     }
 });
