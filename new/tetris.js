@@ -1,5 +1,10 @@
 const canvas = document.getElementById('tetris');
 const context = canvas.getContext('2d');
+const startBtnl = document.getElementById('startBtnl')
+const startBtnm = document.getElementById('startBtnm')
+const startBtns = document.getElementById('startBtns')
+const rangliste = document.getElementById('rangliste')
+const stopBtn = document.getElementById('stop')
 
 context.scale(20, 20);
 
@@ -245,6 +250,23 @@ const player = {
     score: 0,
 };
 
-playerReset();
+function startGame(level){
+    startBtnl.style.display = 'none';
+    startBtnm.style.display = 'none';
+    startBtns.style.display = 'none';
+    rangliste.style.display = 'none';
+    stopBtn.style.display = 'inline-block';
+    if(level == 'm'){
+        dropInterval=500;
+    }
+    if(level == 's'){
+        dropInterval=200;
+    }
+    playerReset();
+    update();
+}
+
+function stopGame() {
+
+}
 updateScore();
-update();

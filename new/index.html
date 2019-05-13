@@ -15,11 +15,41 @@
             border: solid .2em #fff;
             height: 90vh;
         }
+        button{
+            position: absolute;
+            left: 48%;
+            font-size: 20px;
+        }
+        #startBtnl {
+            top: 30%;
+        }
+        #startBtnm {
+            top: 40%;
+        }
+        #startBtns {
+            top: 50%;
+        }
+        #rangliste {
+            top: 70%;
+        }
+        #stop {
+            top: 30%;
+            left: 65%;
+            display: none;
+         }
     </style>
 </head>
 <body>
     <div id="score"></div>
+    <button type="button" id="startBtnl" onclick="startGame('l')">Leicht</button>
+    <button type="button" id="startBtnm" onclick="startGame('m')">Mittel</button>
+    <button type="button" id="startBtns" onclick="startGame('s')">Schwer</button>
+    <button type="button" id="rangliste" onclick="rangliste()">Rangliste</button>
+    <button type="button" id="stop" onclick="stopGame()">Stop</button>
     <canvas id="tetris" width="240" height="400" />
     <script src="tetris.js"></script>
+
+
+
 </body>
 </html>
