@@ -31,6 +31,18 @@ let firstPoints = 0;
 let secondPoints  = 0;
 let thirdPoints  = 0;
 let namePlayer = '';
+let countLines = 0;
+
+//bild für Rakete laden
+function loadMedia() {
+    raketenBild = new Image();
+    raketenBild.src = 'raketen.png';
+}
+
+//RaketenFunktion
+function rakete() {
+    context.drawImage(raketenBild,arena[0].length/2, arena.length, 30,30 );
+}
 
 //Schaut, ob eine Linie voll ist
 function arenaSweep() {
@@ -45,15 +57,18 @@ function arenaSweep() {
         const row = arena.splice(y, 1)[0].fill(0);
         arena.unshift(row);
         ++y;
-
+        countLines++;
         player.score += rowCount * points;
         rowCount *= 2;
+    }
+    if (countLines >= 10) {
+        dropInterval=dropInterval-20;
     }
 }
 //ob man zuoberst ankommt
 function collide(arena, player) {
     const m = player.matrix;
-    const o = player.pos;
+    const o =player.pos;
     for (let y = 0; y < m.length; ++y) {
         for (let x = 0; x < m[y].length; ++x) {
             if (m[y][x] !== 0 &&
@@ -201,9 +216,10 @@ function playerReset() {
     player.pos.y = 0;
     player.pos.x = (arena[0].length / 2 | 0) -
         (player.matrix[0].length / 2 | 0);
-    //wenn zuoberst angekommen
+    //wenn zuoberst angekommen---------------------game over----------------------------------
     if (collide(arena, player)) {
         ranglisteAktuellisieren();
+        rakete();
         ranglisteAnzeigen();
         pause=true;
     }
@@ -306,6 +322,7 @@ function startGame(level){
     namePlayer=nameInput.value;
     nameAnzeige.innerText=namePlayer;
     levelGame=level;
+    loadMedia();
     playerReset();
     update();
     pause=false;
