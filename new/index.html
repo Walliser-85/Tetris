@@ -46,10 +46,77 @@
             left: 65%;
             display: none;
         }
+        .rang {
+            position: absolute;
+            display: none;
+        }
+        #rangTitel {
+            top: 20%;
+            left: 45%;
+        }
+        #rang1 {
+            left: 45%;
+            font-size: 20px;
+            top: 30%;
+        }
+        #rang2{
+            left: 45%;
+            font-size: 20px;
+            top: 40%;
+        }
+        #rang3 {
+            left: 45%;
+            font-size: 20px;
+            top: 50%;
+        }
+        #rang1z {
+            left: 55%;
+            font-size: 20px;
+            top: 30%;
+        }
+        #rang2z {
+            left: 55%;
+            font-size: 20px;
+            top: 40%;
+        }
+        #rang3z {
+            left: 55%;
+            font-size: 20px;
+            top: 50%;
+        }
+        #nameI {
+            position: absolute;
+            left: 43%;
+            font-size: 20px;
+            top: 20%;
+        }
+        #nameAnzeige {
+            position: absolute;
+            left: 65%;
+            font-size: 20px;
+            top: 15%;
+        }
+        #nameText {
+            position: absolute;
+            left: 65%;
+            font-size: 20px;
+            top: 10%;
+        }
+
     </style>
 </head>
 <body>
     <div id="score"></div>
+    <div class="rang" id="rangTitel">Rangliste</div >
+    <div class="rang"  id="rang1">Test 1</div >
+    <div class="rang"  id="rang2">Test 2</div >
+    <div class="rang"  id="rang3">Test 3</div >
+    <div  class="rang" id="rang1z">0</div >
+    <div  class="rang" id="rang2z">0</div >
+    <div  class="rang" id="rang3z">0</div >
+    <div id="nameI">Your name: <input type="text" id="nameInput" name="fname"></div>
+    <div id="nameText">Spieler:</div>
+    <div id="nameAnzeige"></div>
     <button type="button" id="startBtnl" onclick="startGame('l')">leicht</button>
     <button type="button" id="startBtnm" onclick="startGame('m')">mittel</button>
     <button type="button" id="startBtns" onclick="startGame('s')">schwer</button>

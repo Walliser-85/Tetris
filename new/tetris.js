@@ -7,7 +7,16 @@ const rangliste = document.getElementById('rangliste');
 const zurBtn = document.getElementById('zurück');
 const stopBtn = document.getElementById('stop');
 const weiterBtn = document.getElementById('weiter');
-
+const rangTitel=document.getElementById('rangTitel');
+const rang1=document.getElementById('rang1');
+const rang2=document.getElementById('rang2');
+const rang3=document.getElementById('rang3');
+const rang1z=document.getElementById('rang1z');
+const rang2z=document.getElementById('rang2z');
+const rang3z=document.getElementById('rang3z');
+const nameInput=document.getElementById('nameInput');
+const nameInputDiv=document.getElementById('nameI');
+const nameAnzeige=document.getElementById('nameAnzeige');
 context.scale(20, 20);
 
 let dropCounter = 0;
@@ -15,6 +24,13 @@ let dropInterval = 1000;
 let levelGame = 'l';
 let points = 10;
 let pause = false;
+let firstRang = 'no one';
+let secondRang = 'no one';
+let thirdRang = 'no one';
+let firstPoints = 0;
+let secondPoints  = 0;
+let thirdPoints  = 0;
+let namePlayer = '';
 
 //Schaut, ob eine Linie voll ist
 function arenaSweep() {
@@ -187,10 +203,9 @@ function playerReset() {
         (player.matrix[0].length / 2 | 0);
     //wenn zuoberst angekommen
     if (collide(arena, player)) {
-        //---------------------game over einbauen---------------------
-        arena.forEach(row => row.fill(0));
-        player.score = 0;
-        updateScore();
+        ranglisteAktuellisieren();
+        ranglisteAnzeigen();
+        pause=true;
     }
 }
 //Figur drehen, ohne das sie Rand/Figuren überschreitet
@@ -264,12 +279,21 @@ const player = {
     matrix: null,
     score: 0,
 };
+function startGameAgain() {
+    // Bildschirm leeren
+    arena.forEach(row => row.fill(0));
+    player.score = 0;
+    namePlayer='default';
+    updateScore();
+}
 // wenn start button gedrückt wird
 function startGame(level){
+    startGameAgain();
     startBtnl.style.display = 'none';
     startBtnm.style.display = 'none';
     startBtns.style.display = 'none';
     rangliste.style.display = 'none';
+    nameInputDiv.style.display = 'none';
     stopBtn.style.display = 'inline-block';
     if(level == 'm'){
         dropInterval=500;
@@ -279,9 +303,12 @@ function startGame(level){
         dropInterval=200;
         points=14;
     }
+    namePlayer=nameInput.value;
+    nameAnzeige.innerText=namePlayer;
     levelGame=level;
     playerReset();
     update();
+    pause=false;
 }
 
 function stopGame() {
@@ -301,15 +328,73 @@ function ranglisteAnzeigen() {
     startBtnm.style.display = 'none';
     startBtns.style.display = 'none';
     rangliste.style.display = 'none';
+    nameInputDiv.style.display = 'none';
     zurBtn.style.display = 'inline-block';
-}
+    rangTitel.style.display = 'inline-block';
+    //User im Rang
+    rang1.innerText=firstRang;
+    rang1.style.display = 'inline-block';
+    rang2.innerText=secondRang;
+    rang2.style.display = 'inline-block';
+    rang3.innerText=thirdRang;
+    rang3.style.display = 'inline-block';
+    //Zahlen im Rang
+    rang1z.innerText=firstPoints;
+    rang1z.style.display = 'inline-block';
+    rang2z.innerText=secondPoints;
+    rang2z.style.display = 'inline-block';
+    rang3z.innerText=thirdPoints;
+    rang3z.style.display = 'inline-block';
 
+
+}
+function ranglisteAktuellisieren() {
+    let temp='default';
+    let tempS=0;
+    if (player.score>thirdPoints) {
+        if (player.score>secondPoints){
+            if (player.score>firstPoints){
+                //neuer 1. Platz
+                temp=firstRang;
+                tempS=firstPoints;
+                firstRang=namePlayer;
+                firstPoints=player.score;
+                thirdRang=secondRang;
+                thirdPoints=secondPoints;
+                secondRang=temp;
+                secondPoints=tempS;
+            } else {
+                //neuer 2. Platz
+                thirdRang=secondRang;
+                thirdPoints=secondPoints;
+                secondRang=namePlayer;
+                secondPoints=player.score;
+            }
+        } else{
+            //neuer 3. Platz
+            thirdRang=namePlayer;
+            thirdPoints=player.score;
+        }
+    }
+
+}
 function zurück() {
     startBtnl.style.display = 'inline-block';
     startBtnm.style.display = 'inline-block';
     startBtns.style.display = 'inline-block';
     rangliste.style.display = 'inline-block';
+    nameInputDiv.style.display = 'inline-block';
     zurBtn.style.display = 'none';
+    rangTitel.style.display = 'none';
+    //ausblenden
+    //User im Rang
+    rang1.style.display = 'none';
+    rang2.style.display = 'none';
+    rang3.style.display = 'none';
+    //Zahlen im Rang
+    rang1z.style.display = 'none';
+    rang2z.style.display = 'none';
+    rang3z.style.display = 'none';
 }
 
 updateScore();
