@@ -32,20 +32,31 @@
         #rangliste {
             top: 70%;
         }
+        #zurück {
+            top: 70%;
+            display: none;
+        }
         #stop {
             top: 30%;
             left: 65%;
             display: none;
          }
+        #weiter {
+            top: 40%;
+            left: 65%;
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div id="score"></div>
-    <button type="button" id="startBtnl" onclick="startGame('l')">Leicht</button>
-    <button type="button" id="startBtnm" onclick="startGame('m')">Mittel</button>
-    <button type="button" id="startBtns" onclick="startGame('s')">Schwer</button>
-    <button type="button" id="rangliste" onclick="rangliste()">Rangliste</button>
-    <button type="button" id="stop" onclick="stopGame()">Stop</button>
+    <button type="button" id="startBtnl" onclick="startGame('l')">leicht</button>
+    <button type="button" id="startBtnm" onclick="startGame('m')">mittel</button>
+    <button type="button" id="startBtns" onclick="startGame('s')">schwer</button>
+    <button type="button" id="rangliste" onclick="ranglisteAnzeigen()">Rangliste</button>
+    <button type="button" id="zurück" onclick="zurück()">zurück</button>
+    <button type="button" id="stop" onclick="stopGame()">stop</button>
+    <button type="button" id="weiter" onclick="weiterGame()">weiter</button>
     <canvas id="tetris" width="240" height="400" />
     <script src="tetris.js"></script>
 

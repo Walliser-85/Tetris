@@ -1,12 +1,20 @@
 const canvas = document.getElementById('tetris');
 const context = canvas.getContext('2d');
-const startBtnl = document.getElementById('startBtnl')
-const startBtnm = document.getElementById('startBtnm')
-const startBtns = document.getElementById('startBtns')
-const rangliste = document.getElementById('rangliste')
-const stopBtn = document.getElementById('stop')
+const startBtnl = document.getElementById('startBtnl');
+const startBtnm = document.getElementById('startBtnm');
+const startBtns = document.getElementById('startBtns');
+const rangliste = document.getElementById('rangliste');
+const zurBtn = document.getElementById('zurück');
+const stopBtn = document.getElementById('stop');
+const weiterBtn = document.getElementById('weiter');
 
 context.scale(20, 20);
+
+let dropCounter = 0;
+let dropInterval = 1000;
+let levelGame = 'l';
+let points = 10;
+let pause = false;
 
 //Schaut, ob eine Linie voll ist
 function arenaSweep() {
@@ -22,7 +30,7 @@ function arenaSweep() {
         arena.unshift(row);
         ++y;
 
-        player.score += rowCount * 10;
+        player.score += rowCount * points;
         rowCount *= 2;
     }
 }
@@ -148,8 +156,11 @@ function rotate(matrix, dir) {
         matrix.reverse();
     }
 }
-//Wenn eine Figur runter kommt
+//Wenn eine Figur runter kommt automatisch oder wenn Taste gedrückt
 function playerDrop() {
+    if (pause){
+        return;
+    }
     player.pos.y++;
     if (collide(arena, player)) {
         player.pos.y--;
@@ -160,7 +171,7 @@ function playerDrop() {
     }
     dropCounter = 0;
 }
-//Figur wird bewegt
+//Figur wird bewegt wenn tasten gerückt werden
 function playerMove(offset) {
     player.pos.x += offset;
     if (collide(arena, player)) {
@@ -176,6 +187,7 @@ function playerReset() {
         (player.matrix[0].length / 2 | 0);
     //wenn zuoberst angekommen
     if (collide(arena, player)) {
+        //---------------------game over einbauen---------------------
         arena.forEach(row => row.fill(0));
         player.score = 0;
         updateScore();
@@ -197,11 +209,11 @@ function playerRotate(dir) {
     }
 }
 
-let dropCounter = 0;
-let dropInterval = 1000;
+
 
 let lastTime = 0;
 function update(time = 0) {
+
     const deltaTime = time - lastTime;
 
     dropCounter += deltaTime;
@@ -220,6 +232,9 @@ function updateScore() {
 }
 
 document.addEventListener('keydown', event => {
+    if (pause){
+        return;
+    }
     if (event.keyCode === 37) {
         playerMove(-1);
     } else if (event.keyCode === 39) {
@@ -249,7 +264,7 @@ const player = {
     matrix: null,
     score: 0,
 };
-
+// wenn start button gedrückt wird
 function startGame(level){
     startBtnl.style.display = 'none';
     startBtnm.style.display = 'none';
@@ -258,15 +273,43 @@ function startGame(level){
     stopBtn.style.display = 'inline-block';
     if(level == 'm'){
         dropInterval=500;
+        points=12;
     }
     if(level == 's'){
         dropInterval=200;
+        points=14;
     }
+    levelGame=level;
     playerReset();
     update();
 }
 
 function stopGame() {
-
+    weiterBtn.style.display = 'inline-block';
+    stopBtn.style.display = 'none';
+    pause=true;
 }
+
+function weiterGame() {
+    weiterBtn.style.display = 'none';
+    stopBtn.style.display = 'inline-block';
+    pause=false;
+}
+
+function ranglisteAnzeigen() {
+    startBtnl.style.display = 'none';
+    startBtnm.style.display = 'none';
+    startBtns.style.display = 'none';
+    rangliste.style.display = 'none';
+    zurBtn.style.display = 'inline-block';
+}
+
+function zurück() {
+    startBtnl.style.display = 'inline-block';
+    startBtnm.style.display = 'inline-block';
+    startBtns.style.display = 'inline-block';
+    rangliste.style.display = 'inline-block';
+    zurBtn.style.display = 'none';
+}
+
 updateScore();
