@@ -346,7 +346,6 @@ function ranglisteAnzeigen() {
     rang3z.innerText=thirdPoints;
     rang3z.style.display = 'inline-block';
 
-
 }
 function ranglisteAktuellisieren() {
     let temp='default';

@@ -17,8 +17,17 @@
         }
         button{
             position: absolute;
-            left: 48%;
+            left: 46%;
             font-size: 20px;
+
+            background-color:rgba(68,199,103, 0.5);
+            -moz-border-radius:28px;
+            -webkit-border-radius:28px;
+            border-radius:28px;
+            border:1px solid #18ab29;
+            display:inline-block;
+            color:#ffffff;
+            padding:16px 31px;
         }
         #startBtnl {
             top: 30%;
@@ -28,9 +37,11 @@
         }
         #startBtns {
             top: 50%;
+            left: 45.5%;
         }
         #rangliste {
             top: 70%;
+            left: 45%;
         }
         #zurück {
             top: 70%;
@@ -49,23 +60,31 @@
         .rang {
             position: absolute;
             display: none;
+
+            background-color:rgba(68,199,103, 0.5);
+            -moz-border-radius:20px;
+            -webkit-border-radius:20px;
+            border-radius:20px;
+            border:1px solid #18ab29;
+            color:#ffffff;
+            padding:10px 20px;
         }
         #rangTitel {
             top: 20%;
-            left: 45%;
+            left: 40%;
         }
         #rang1 {
-            left: 45%;
+            left: 40%;
             font-size: 20px;
             top: 30%;
         }
         #rang2{
-            left: 45%;
+            left: 40%;
             font-size: 20px;
             top: 40%;
         }
         #rang3 {
-            left: 45%;
+            left: 40%;
             font-size: 20px;
             top: 50%;
         }
@@ -124,6 +143,7 @@
     <button type="button" id="zurück" onclick="zurück()">zurück</button>
     <button type="button" id="stop" onclick="stopGame()">stop</button>
     <button type="button" id="weiter" onclick="weiterGame()">weiter</button>
+
     <canvas id="tetris" width="240" height="400" />
     <script src="tetris.js"></script>
 
