@@ -305,6 +305,7 @@ function startGameAgain() {
 // wenn start button gedrückt wird
 function startGame(level){
     startGameAgain();
+    playMusic();
     startBtnl.style.display = 'none';
     startBtnm.style.display = 'none';
     startBtns.style.display = 'none';
@@ -329,12 +330,14 @@ function startGame(level){
 }
 
 function stopGame() {
+    pauseMusic();
     weiterBtn.style.display = 'inline-block';
     stopBtn.style.display = 'none';
     pause=true;
 }
 
 function weiterGame() {
+    playMusic();
     weiterBtn.style.display = 'none';
     stopBtn.style.display = 'inline-block';
     pause=false;
@@ -411,6 +414,17 @@ function zurück() {
     rang1z.style.display = 'none';
     rang2z.style.display = 'none';
     rang3z.style.display = 'none';
+}
+
+function playMusic(){
+    audiofile.play();
+    audiofile.addEventListener("ended", function(){
+        audiofile.play();
+    });
+}
+
+function pauseMusic(){
+    audiofile.pause();
 }
 
 updateScore();
