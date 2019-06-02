@@ -43,7 +43,22 @@ function loadMedia() {
 
 //RaketenFunktion
 function rakete() {
-    context.drawImage(raketenBild,arena[0].length/2, arena.length, 30,30 );
+    var elem = document.getElementById("rocket");
+    document.getElementById("rocket").style.visibility = "visible";
+    var pos = 600;
+    var id = setInterval(frame, 1);
+    function frame(){
+        if(pos == 40){
+            clearInterval(id)
+            ranglisteAnzeigen();
+            document.getElementById("rocket").style.visibility = "hidden";
+        }
+        else{
+            pos--;
+            elem.style.top = pos + 'px';
+        }
+    }
+    //context.drawImage(raketenBild,arena[0].length/2, arena.length, 30,30 );
 }
 
 //Schaut, ob eine Linie voll ist
@@ -223,8 +238,13 @@ function playerReset() {
     if (collide(arena, player)) {
         gameOverMusic();
         ranglisteAktuellisieren();
-        rakete();
-        ranglisteAnzeigen();
+        if(player.score>100){
+            rakete();
+        }
+        else{
+            ranglisteAnzeigen();
+        }
+
         pause=true;
         pauseMusic();
     }
