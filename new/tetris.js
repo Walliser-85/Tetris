@@ -222,6 +222,7 @@ function playerReset() {
         rakete();
         ranglisteAnzeigen();
         pause=true;
+        pauseMusic();
     }
 }
 //Figur drehen, ohne das sie Rand/Figuren überschreitet
