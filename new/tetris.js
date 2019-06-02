@@ -19,6 +19,7 @@ const nameInputDiv=document.getElementById('nameI');
 const nameAnzeige=document.getElementById('nameAnzeige');
 const audioL=document.getElementById('audiofileLine');
 const audioGO=document.getElementById('audiofileGameOver');
+const audioR=document.getElementById('audiofileRakete');
 context.scale(20, 20);
 
 let dropCounter = 0;
@@ -34,12 +35,6 @@ let secondPoints  = 0;
 let thirdPoints  = 0;
 let namePlayer = '';
 let countLines = 0;
-
-//bild für Rakete laden
-function loadMedia() {
-    raketenBild = new Image();
-    raketenBild.src = 'raketen.png';
-}
 
 //RaketenFunktion
 function rakete() {
@@ -58,7 +53,6 @@ function rakete() {
             elem.style.top = pos + 'px';
         }
     }
-    //context.drawImage(raketenBild,arena[0].length/2, arena.length, 30,30 );
 }
 
 //Schaut, ob eine Linie voll ist
@@ -236,10 +230,11 @@ function playerReset() {
         (player.matrix[0].length / 2 | 0);
     //wenn zuoberst angekommen---------------------game over----------------------------------
     if (collide(arena, player)) {
-        gameOverMusic();
         ranglisteAktuellisieren();
-        if(player.score>100){
+        gameOverMusic();
+        if(player.score>=100){
             rakete();
+            raketenMusic();
         }
         else{
             ranglisteAnzeigen();
@@ -320,6 +315,7 @@ const player = {
     matrix: null,
     score: 0,
 };
+
 function startGameAgain() {
     // Bildschirm leeren
     arena.forEach(row => row.fill(0));
@@ -348,7 +344,6 @@ function startGame(level){
     namePlayer=nameInput.value;
     nameAnzeige.innerText=namePlayer;
     levelGame=level;
-    loadMedia();
     playerReset();
     update();
     pause=false;
@@ -369,6 +364,7 @@ function weiterGame() {
 }
 
 function ranglisteAnzeigen() {
+    audioR.pause();
     startBtnl.style.display = 'none';
     startBtnm.style.display = 'none';
     startBtns.style.display = 'none';
@@ -458,6 +454,10 @@ function linieMusic(){
 
 function gameOverMusic(){
     audioGO.play();
+}
+
+function raketenMusic(){
+    audioR.play();
 }
 
 updateScore();
