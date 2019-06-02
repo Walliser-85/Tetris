@@ -17,6 +17,8 @@ const rang3z=document.getElementById('rang3z');
 const nameInput=document.getElementById('nameInput');
 const nameInputDiv=document.getElementById('nameI');
 const nameAnzeige=document.getElementById('nameAnzeige');
+const audioL=document.getElementById('audiofileLine');
+const audioGO=document.getElementById('audiofileGameOver');
 context.scale(20, 20);
 
 let dropCounter = 0;
@@ -53,6 +55,7 @@ function arenaSweep() {
                 continue outer;
             }
         }
+        linieMusic();
 
         const row = arena.splice(y, 1)[0].fill(0);
         arena.unshift(row);
@@ -218,6 +221,7 @@ function playerReset() {
         (player.matrix[0].length / 2 | 0);
     //wenn zuoberst angekommen---------------------game over----------------------------------
     if (collide(arena, player)) {
+        gameOverMusic();
         ranglisteAktuellisieren();
         rakete();
         ranglisteAnzeigen();
@@ -426,6 +430,14 @@ function playMusic(){
 
 function pauseMusic(){
     audiofile.pause();
+}
+
+function linieMusic(){
+    audioL.play();
+}
+
+function gameOverMusic(){
+    audioGO.play();
 }
 
 updateScore();
