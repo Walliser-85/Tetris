@@ -66,8 +66,8 @@ function arenaSweep() {
         }
         linieMusic();
 
-        const row = arena.splice(y, 1)[0].fill(0);
-        arena.unshift(row);
+        const row = arena.splice(y, 1)[0].fill(0);  //nimmt die Linie raus und füllt sie mit 0en
+        arena.unshift(row);  //fügt sie zu oberst ein
         ++y;
         countLines++;
         player.score += rowCount * points;
@@ -166,7 +166,7 @@ function draw() {
     context.fillStyle = '#000';
     context.fillRect(0, 0, canvas.width, canvas.height);
 
-    drawMatrix(arena, {x: 0, y: 0});
+    drawMatrix(arena, {x: 0, y: 0});  //damit die Figur auf dem canvas bleibt, nicht nur die Zahlen
     drawMatrix(player.matrix, player.pos);
 }
 //Figur wird fix positioniert -> die nullen werden durch die zahlen ersetzt
@@ -182,7 +182,7 @@ function merge(arena, player) {
 //Figur drehen
 function rotate(matrix, dir) {
     for (let y = 0; y < matrix.length; ++y) {
-        for (let x = 0; x < y; ++x) {
+        for (let x = 0; x < y; ++x) {  //transportieren
             [
                 matrix[x][y],
                 matrix[y][x],
@@ -192,7 +192,7 @@ function rotate(matrix, dir) {
             ];
         }
     }
-
+    //umkehren nach links oder rechts
     if (dir > 0) {
         matrix.forEach(row => row.reverse());
     } else {
@@ -205,7 +205,7 @@ function playerDrop() {
         return;
     }
     player.pos.y++;
-    if (collide(arena, player)) {
+    if (collide(arena, player)) {  //arena mit den zahlen und 0en und player, aktuelle figur die runter kommet
         player.pos.y--;
         merge(arena, player);
         playerReset();
@@ -252,7 +252,7 @@ function playerRotate(dir) {
     while (collide(arena, player)) {
         player.pos.x += offset;
         offset = -(offset + (offset > 0 ? 1 : -1));
-        if (offset > player.matrix[0].length) {
+        if (offset > player.matrix[0].length) { //wenn es ankommt irrgendwo, schaut es ob +1 , -2,+3... etwas frei ist
             rotate(player.matrix, -dir);
             player.pos.x = pos;
             return;
