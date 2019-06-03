@@ -20,7 +20,7 @@ const nameAnzeige=document.getElementById('nameAnzeige');
 const audioL=document.getElementById('audiofileLine');
 const audioGO=document.getElementById('audiofileGameOver');
 const audioR=document.getElementById('audiofileRakete');
-context.scale(20, 20);
+context.scale(20, 20); //sonst kommen die Figuren zu klein heraus
 
 let dropCounter = 0;
 let dropInterval = 1000;
@@ -169,7 +169,7 @@ function draw() {
     drawMatrix(arena, {x: 0, y: 0});
     drawMatrix(player.matrix, player.pos);
 }
-//Figur wird fix positioniert
+//Figur wird fix positioniert -> die nullen werden durch die zahlen ersetzt
 function merge(arena, player) {
     player.matrix.forEach((row, y) => {
         row.forEach((value, x) => {
@@ -275,7 +275,7 @@ function update(time = 0) {
     lastTime = time;
 
     draw();
-    requestAnimationFrame(update);
+    requestAnimationFrame(update); //vor jedem repaint (ca. 60 pro Sekunde) wird die update Methode aufgerufen
 }
 
 function updateScore() {
