@@ -169,7 +169,7 @@ function draw() {
     drawMatrix(arena, {x: 0, y: 0});
     drawMatrix(player.matrix, player.pos);
 }
-
+//Figur wird fix positioniert
 function merge(arena, player) {
     player.matrix.forEach((row, y) => {
         row.forEach((value, x) => {
