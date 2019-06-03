@@ -1,0 +1,123 @@
+body {
+    background: #202028;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 2em;
+    text-align: center;
+}
+canvas {
+    border: solid .2em #fff;
+    height: 90vh;
+}
+button{
+    position: absolute;
+    left: 46%;
+    font-size: 20px;
+
+    background-color:rgba(68,199,103, 0.5);
+    -moz-border-radius:28px;
+    -webkit-border-radius:28px;
+    border-radius:28px;
+    border:1px solid #18ab29;
+    display:inline-block;
+    color:#ffffff;
+    padding:16px 31px;
+}
+#startBtnl {
+    top: 30%;
+}
+#startBtnm {
+    top: 40%;
+}
+#startBtns {
+    top: 50%;
+    left: 45.5%;
+}
+#rangliste {
+    top: 70%;
+    left: 45%;
+}
+#rocket {
+    position: absolute;
+    top: 80%;
+    left: 45%;
+    visibility: hidden;
+}
+#zurück {
+    top: 70%;
+    display: none;
+}
+#stop {
+    top: 30%;
+    left: 65%;
+    display: none;
+}
+#weiter {
+    top: 40%;
+    left: 65%;
+    display: none;
+}
+.rang {
+    position: absolute;
+    display: none;
+
+    background-color:rgba(68,199,103, 0.5);
+    -moz-border-radius:20px;
+    -webkit-border-radius:20px;
+    border-radius:20px;
+    border:1px solid #18ab29;
+    color:#ffffff;
+    padding:10px 20px;
+}
+#rangTitel {
+    top: 20%;
+    left: 40%;
+}
+#rang1 {
+    left: 40%;
+    font-size: 20px;
+    top: 30%;
+}
+#rang2{
+    left: 40%;
+    font-size: 20px;
+    top: 40%;
+}
+#rang3 {
+    left: 40%;
+    font-size: 20px;
+    top: 50%;
+}
+#rang1z {
+    left: 55%;
+    font-size: 20px;
+    top: 30%;
+}
+#rang2z {
+    left: 55%;
+    font-size: 20px;
+    top: 40%;
+}
+#rang3z {
+    left: 55%;
+    font-size: 20px;
+    top: 50%;
+}
+#nameI {
+    position: absolute;
+    left: 43%;
+    font-size: 20px;
+    top: 20%;
+}
+#nameAnzeige {
+    position: absolute;
+    left: 65%;
+    font-size: 20px;
+    top: 15%;
+}
+#nameText {
+    position: absolute;
+    left: 65%;
+    font-size: 20px;
+    top: 10%;
+}
