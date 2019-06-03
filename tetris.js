@@ -281,7 +281,7 @@ function update(time = 0) {
 function updateScore() {
     document.getElementById('score').innerText = player.score;
 }
-
+//Listener für die Tastatureingaben
 document.addEventListener('keydown', event => {
     if (pause){
         return;
